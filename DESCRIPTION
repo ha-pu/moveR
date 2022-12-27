@@ -1,0 +1,20 @@
+Package: moveR
+Type: Package
+Title: moveR
+Version: 0.1.0
+Author: Harald Puhr
+Maintainer: Harald Puhr <harald.puhr@gmail.com>
+Description: moveR
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+	readr,
+	readxl,
+	shiny,
+	stringr,
+	utils,
+	writexl
+RoxygenNote: 7.2.1
+Depends: 
+    R (>= 2.10)
