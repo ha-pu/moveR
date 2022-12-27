@@ -4,24 +4,26 @@ library(stringr)
 library(writexl)
 
 fluidPage(
-  
-  sidebarLayout(
-    sidebarPanel(
+  fluidRow(
+    h2("Eingaben")
+  ),
+  fluidRow(
+    column(
+      width = 4,
       textInput(
         inputId = "source_path",
         label = "Quellenverzeichnis:"
-      ),
-      br(),
+      )
+    ),
+    column(
+      width = 4,
       textInput(
         inputId = "target_path",
         label = "Zielverzeichnis:"
-      ),
-      br(),
-      actionButton(
-        inputId = "map_save",
-        label = "Mapping Datei erstellen"
-      ),
-      br(),
+      )
+    ),
+    column(
+      width = 4,
       fileInput(
         inputId = "map_file",
         label = NULL,
@@ -29,19 +31,43 @@ fluidPage(
         multiple = FALSE, 
         buttonLabel = "Durchsuchen", 
         placeholder = "Keine Datei ausgewählt"
-        ),
+      )
+    )
+  ),
+  fluidRow(
+    hr(),
+    br(),
+    h2("Funktionen")
+  ),
+  fluidRow(
+    column(
+      width = 4,
       actionButton(
-        inputId = "map_load",
-        label = "Mapping Datei laden"
+        inputId = "map_save",
+        label = "Mapping Datei erstellen"
       )
     ),
-    
-    mainPanel(
-      textOutput(outputId = "source_path"),
-      br(),
-      textOutput(outputId = "target_path"),
-      br(),
-      textOutput(outputId = "status")
+    column(
+      width = 4,
+      actionButton(
+        inputId = "copy",
+        label = "Dateien kopieren"
+      )
+    ),
+    column(
+      width = 4,
+      actionButton(
+        inputId = "remove",
+        label = "Dateien löschen"
+      )
     )
+  ),
+  fluidRow(
+    hr(),
+    br(),
+    h2("Ergebnisse")
+  ),
+  fluidRow(
+    textOutput(outputId = "status")
   )
 )
