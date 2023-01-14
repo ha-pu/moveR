@@ -28,8 +28,8 @@ function(input, output, session) {
   # check mapping file ---------------------------------------------------------
   check_file <- function(mapping) {
     check <- TRUE
-    if (any(names(mapping) != c("Quelldatei", "Zielordner", "Zieldatei"))) {
-      output$status <- renderText("Die Mapping Datei muss die folgenden Spalten haben: Quelldatei, Zielordner, Zieldatei!")
+    if (any(names(mapping)[1:3] != c("Quelldatei", "Zielordner", "Zieldatei"))) {
+      output$status <- renderText("Die ersten drei Spalten der Mapping Datei müssen die folgenden Namen haben: Quelldatei, Zielordner, Zieldatei!")
       check <- FALSE
     }
     if (check & any(is.na(mapping$Quelldatei))) {
@@ -52,7 +52,7 @@ function(input, output, session) {
       source_path <- str_remove_all(source_path, "\\'")
       target_path <- str_remove_all(input$target_path, '\\"')
       target_path <- str_remove_all(target_path, "\\'")
-      mapping <- read_xlsx(inFile$datapath)
+      mapping <- read_xlsx(inFile$datapath, range = cell_cols("A:C"))
       if (!dir.exists(source_path)) {
         output$status <- renderText("Quellverzeichnis exisitert nicht!")
       } else if (!dir.exists(target_path)) {
@@ -110,7 +110,7 @@ function(input, output, session) {
     if (!is.null(inFile)) {
       source_path <- str_remove_all(input$source_path, '\\"')
       source_path <- str_remove_all(source_path, "\\'")
-      mapping <- read_xlsx(inFile$datapath)
+      mapping <- read_xlsx(inFile$datapath, range = cell_cols("A:C"))
       if (!dir.exists(source_path)) {
         output$status <- renderText("Quellverzeichnis exisitert nicht!")
       } else {
